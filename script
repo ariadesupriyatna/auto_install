@@ -1,0 +1,108 @@
+#!/usr/bin/python3
+import subprocess
+import time
+import sys
+
+# Clear terminal
+subprocess.run("clear", shell=True)
+# Print header
+print('''\033[91m
+   ]|I{•------» [ AriAdeSupriyatna ] «------•}I|[
+''')
+
+# Function to print text slowly
+def slowprint(s):
+    for c in s + '\n':
+        sys.stdout.write(c)
+        sys.stdout.flush()
+        time.sleep(5. / 100)
+
+# Print main menu
+print ('''\033[95m
++--------------------------------------+
+| This Tool Install All Basic Packages |
++--------------------------------------+''')
+
+# Print package list slowly
+slowprint('''\033[93m
+[01] haskell
+[02] python2
+[03] tree
+[04] nodejs-lts
+[05] php
+[06] java
+[07] git
+[08] perl
+[09] tcsh
+[10] helix
+[11] neovim
+[12] openssl
+[13] openssh
+[14] wget
+[15] gdb
+[16] nmap
+[17] lynx
+[18] bore
+[19] ruby
+[20] fish
+[21] clamav
+[22] radare2
+[23] postgresql
+[24] busybox
+[25] fastfetch
+[26] strace
+[27] binutils
+[28] golang
+[29] yara
+[30] alpine
+[31] proot-distro
+[32] logo-ls
+[33] tor
+[34] proxychains-ng
+[35] samba
+[36] sslscan
+[37] darkhttpd
+[38] nasm
+[39] irssi
+[40] ltrace
+[41] swift
+[42] scala
+[43] fff
+[44] hexer''')
+
+# Print additional instruction
+slowprint('''\033[96m
+Use this command to access storage in Termux:
+[00] termux-setup-storage''')
+
+# Ask user if they want to install all packages
+print ("")
+choice = input("\033[93mDo you want to install all packages? (yes/no): ")
+
+# If user chooses not to install, exit
+if choice.lower() == 'no':
+    sys.exit()
+
+# If user chooses to install, update package lists and upgrade existing packages
+elif choice.lower() == 'yes':
+    subprocess.run(["apt", "update"])
+    subprocess.run(["apt", "upgrade", "-y"])
+
+# List of packages to install
+packages = ["ghc", "python2", "tree", "nodejs-lts", "php", "openjdk-17", "git", "perl", "tcsh",
+            "helix", "neovim", "openssl", "openssh", "wget", "gdb", "nmap", "lynx", "bore",
+            "ruby", "fish", "clamav", "radare2", "postgresql", "busybox", "fastfetch", "strace",
+            "binutils", "golang", "yara", "alpine", "proot-distro", "logo-ls", "tor",
+            "proxychains-ng", "samba", "sslscan", "darkhttpd", "nasm", "irssi", "ltrace",
+            "swift", "scala", "fff", "hexer"]
+
+# Install packages
+subprocess.run(["apt", "install"] + packages + ["-y"])
+
+# Allow access to Termux storage
+print ("Allow access to storage in Termux")
+subprocess.run("termux-setup-storage", shell=True)
+
+# Print completion message
+print("+-------------------------------------------------+")
+input("\n\nPress the enter key to exit : ")
